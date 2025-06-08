@@ -10,8 +10,8 @@ RUN dotnet publish -c Release -o out
 FROM mcr.microsoft.com/dotnet/aspnet:9.0
 WORKDIR /app
 
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup \
-    && chown -R appuser:appgroup /app
+RUN groupadd -r appgroup && useradd -r -g appgroup appuser \
+    && mkdir -p /app && chown -R appuser:appgroup /app
 
 USER appuser
 
