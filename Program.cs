@@ -2,18 +2,16 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 1. Conexão com banco Oracle
+// 1. Conexão com banco PostgreSQL
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseOracle(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // 2. Serviços da API
+builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddRazorPages();
-builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpClient();
-builder.Services.AddControllersWithViews()
-    .AddRazorRuntimeCompilation();
 
 // 3. Injeção de dependências – REPOSITORIES
 builder.Services.AddScoped<UsuarioGSRepository>();
@@ -26,7 +24,7 @@ builder.Services.AddScoped<AlertaService>();
 var app = builder.Build();
 
 // 5. Middleware
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 {
     app.UseSwagger();
     app.UseSwaggerUI();

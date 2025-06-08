@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/leonardo/gsDotnet/gsDotnet.csproj": {}
+    "/home/leonardo/gsDevops/gsDotnet.csproj": {}
   },
   "projects": {
-    "/home/leonardo/gsDotnet/gsDotnet.csproj": {
+    "/home/leonardo/gsDevops/gsDotnet.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/leonardo/gsDotnet/gsDotnet.csproj",
+        "projectUniqueName": "/home/leonardo/gsDevops/gsDotnet.csproj",
         "projectName": "gsDotnet",
-        "projectPath": "/home/leonardo/gsDotnet/gsDotnet.csproj",
+        "projectPath": "/home/leonardo/gsDevops/gsDotnet.csproj",
         "packagesPath": "/home/leonardo/.nuget/packages/",
-        "outputPath": "/home/leonardo/gsDotnet/obj/",
+        "outputPath": "/home/leonardo/gsDevops/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/leonardo/.nuget/NuGet/NuGet.Config"
@@ -63,9 +63,9 @@
               "target": "Package",
               "version": "[9.0.5, )"
             },
-            "Oracle.EntityFrameworkCore": {
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
-              "version": "[9.23.80, )"
+              "version": "[9.0.4, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

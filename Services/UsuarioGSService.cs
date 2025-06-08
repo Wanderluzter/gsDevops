@@ -33,4 +33,31 @@ public class UsuarioGSService
         _context.Usuarios.Add(usuario);
         _context.SaveChanges();
     }
+
+    public bool Update(int id, UsuarioGSCreateDTO dto)
+    {
+        var usuario = _context.Usuarios.Find(id);
+        if (usuario == null)
+            return false;
+
+        usuario.Nome = dto.Nome;
+        usuario.Telefone = dto.Telefone;
+        usuario.TelefoneEmergencia = dto.TelefoneEmergencia;
+        usuario.Email = dto.Email;
+        usuario.Senha = dto.Senha;
+
+        _context.SaveChanges();
+        return true;
+    }
+
+    public bool Delete(int id)
+    {
+        var usuario = _context.Usuarios.Find(id);
+        if (usuario == null)
+            return false;
+
+        _context.Usuarios.Remove(usuario);
+        _context.SaveChanges();
+        return true;
+    }
 }
