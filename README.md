@@ -1,95 +1,84 @@
-# 🌪️ Weatherman - Sistema de Apoio em Situações Climáticas Extremas
+🌩️ Weatherman - Containerização e Orquestração da API com Banco em Docker
 
-**Weatherman** é um aplicativo mobile inteligente que utiliza geolocalização, colaboração entre usuários e inteligência artificial para auxiliar pessoas em regiões afetadas por desastres naturais e eventos climáticos extremos.
+📲 Resumo da Ideia
+Weatherman é um aplicativo mobile inteligente que utiliza geolocalização para mapear regiões afetadas por eventos climáticos extremos, prever condições futuras, indicar locais seguros, permitir comunicação e colaboração entre usuários, e utilizar Inteligência Artificial para prever riscos e oferecer suporte contextual.
 
-Este projeto foi desenvolvido como parte da disciplina **Advanced Business Development with .NET**, com foco na construção de uma API REST robusta e inovadora para cenários de urgência climática.
+Este repositório contém a conteinerização da API desenvolvida em .NET 9, além do banco de dados PostgreSQL, usando Docker e Docker Compose para criar um ambiente integrado, robusto e fácil de executar.
 
----
+🛠️ Tecnologias e Ferramentas Usadas
+.NET 9 SDK & ASP.NET Core Runtime — Construção e execução da API REST.
 
-## 🚨 Problema
+PostgreSQL (container oficial) — Banco de dados relacional persistente.
 
-Eventos climáticos extremos (enchentes, tempestades, queimadas, etc.) estão cada vez mais frequentes e perigosos. Em situações críticas, as pessoas frequentemente não têm acesso a informações confiáveis, comunicação segura ou suporte imediato.
+Docker — Para criação das imagens personalizadas e ambiente isolado.
 
----
+Docker Compose — Orquestração dos containers para API e banco.
 
-## 🎯 Solução
+Variáveis de Ambiente e Boas Práticas — Usuário não root, diretório de trabalho, persistência via volumes nomeados.
 
-A proposta do SafeZone é entregar um sistema completo com as seguintes funcionalidades:
+📦 Estrutura do Projeto
+Dockerfile — Imagem personalizada da API, configurada para rodar com usuário não root, configurada para expor porta 80.
 
-- 📍 **Geolocalização** em tempo real das áreas afetadas
-- 🛰️ **Previsão de riscos futuros** usando modelos de IA
-- 🏥 **Indicação de rotas e locais seguros**
-- 🗣️ **Canal de comunicação e colaboração entre usuários**
-- 🤖 **IA para suporte contextual e tomada de decisão**
+docker-compose.yml — Define dois serviços:
 
----
+api — Build da aplicação .NET, exposta na porta 8080, configurada para conexão com o banco via variável de ambiente.
 
-## 🛠️ Tecnologias Utilizadas
+postgres-db — Banco PostgreSQL com volume nomeado para persistência, variáveis para usuário, senha e banco definidos.
 
-| Tecnologia            | Finalidade                                |
-|-----------------------|-------------------------------------------|
-| ASP.NET Core          | Backend e construção da API REST          |
-| Entity Framework Core | Mapeamento objeto-relacional (ORM)        |
-| Oracle                | Banco de dados relacional                 |
-| Razor Pages           | Interface administrativa (se aplicável)   |
-| C#                    | Lógica de negócio e modelo de dados       |
-| JSON + Insomnia       | Testes e consumo da API                   |
-| Swagger               | Documentação da API REST                  |
-| Mobile (Futuro)       | App híbrido com Flutter ou React Native   |
+🚀 Como Executar
+Clone este repositório:
 
----
+git clone https://github.com/seu-usuario/seu-projeto.git
+cd seu-projeto
+Configure variáveis sensíveis (opcional) no arquivo .env:
 
-## 🧩 Funcionalidades Principais da API
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=senha123
+POSTGRES_DB=meubanco
+Execute os containers em modo background:
 
-- Cadastro e autenticação de usuários
-- Registro e visualização de alertas geolocalizados
+docker-compose up -d
+Confira os logs dos containers (opcional):
 
----
+bash
+Copiar
+Editar
+docker-compose logs -f
+Acesse a API no navegador ou via cliente REST:
 
-## 📂 Estrutura do Projeto
+http://localhost:8080/swagger
+📋 Requisitos do Projeto
+Docker instalado e rodando (versão recomendada 20+)
 
-/SafeZoneAPI
+Docker Compose instalado
 
-├── Controllers
+.NET 9 SDK (para desenvolvimento local, se necessário)
 
-├── Models
+Cliente REST (Insomnia, Postman, etc.)
 
-├── DTOs
+📚 Observações Técnicas
+A API roda com usuário não root para seguir boas práticas de segurança.
 
-├── Services
+O banco PostgreSQL está configurado com volume nomeado para garantir persistência dos dados.
 
-├── Data
+A porta 8080 está mapeada para a porta 80 interna do container da API.
 
-├── Migrations
+Variáveis de ambiente são usadas para configurar conexões e modo da aplicação.
 
-└── Program.cs
+Toda comunicação entre containers ocorre na rede docker personalizada rede-local.
 
----
+🎯 Objetivos Cumpridos
+Container da aplicação .NET 9 construído via Dockerfile com boas práticas
 
-## 🧪 Como Executar
+Container do banco de dados PostgreSQL configurado com volume persistente e variáveis de ambiente
 
-### Pré-requisitos
+Orquestração via Docker Compose para facilitar execução conjunta
 
-- [.NET 7 ou superior](https://dotnet.microsoft.com/download)
-- Banco de dados (PostgreSQL ou Oracle)
-- [Insomnia](https://insomnia.rest/) ou Postman para testes da API
+Aplicação rodando com CRUD completo e conexão com banco persistente
 
-### Executar localmente
-
-```bash
-git clone https://github.com/wanderluzter/gsDotnet.git
-cd gsDotnet
-dotnet restore
-dotnet ef database update
-dotnet run
-```
-
-Acesse via: http://localhost:5218/swagger
-
----
+Uso de usuário não root e variáveis de ambiente para segurança e configuração
 
 👥 Equipe
-
 Leonardo José - RM556110
 
 Raul Clauson - RM555006
